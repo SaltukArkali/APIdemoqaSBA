@@ -3,6 +3,7 @@ package tests;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 import pojos.DemoqaPojo1;
@@ -38,7 +39,7 @@ public class TC01Post {
                 "  \"password\": \"JQ3iPpTEKTLjSQJ!\"\n" +
                 "}";
         response = given().contentType(ContentType.JSON).
-                auth().oauth2(ConfigReader.getProperty("token")).
+                auth().basic("saltuk","Aalen21").
                 body(body).
                 post(endpoint);
         response.prettyPrint();
@@ -46,8 +47,9 @@ public class TC01Post {
         System.out.println(response.getStatusCode());
         System.out.println(response.getContentType());
 
-//        Assert.assertEquals(response.getStatusCode(),"200");
-//        Assert.assertEquals(response.getContentType(),"application/json");
+        Assert.assertEquals((response.prettyPrint()),"false");
+        Assert.assertEquals(response.getStatusCode(),200);
+        response.then().assertThat().statusCode(HttpStatus.SC_OK).contentType(ContentType.JSON);
     }
 
     @Test
@@ -57,15 +59,19 @@ public class TC01Post {
         myTestBody.put("userName","C");
         myTestBody.put("password","JQ3iPpTEKTLjSQJ!");
 
-        response = given().contentType(ContentType.JSON).
-                auth().oauth2(ConfigReader.getProperty("token")).
-                body(myTestBody).
-                post(endpoint);
-        response.prettyPrint();
+        postMethod(myTestBody);
+//
+//        response = given().contentType(ContentType.JSON).
+//                auth().oauth2(ConfigReader.getProperty("token")).
+//                body(myTestBody).
+//                post(endpoint);
+//        response.prettyPrint();
+        jsonPath = response.jsonPath();
 
         System.out.println(response.getStatusCode());
         System.out.println(response.getContentType());
-
+        response.then().assertThat().statusCode(HttpStatus.SC_NOT_FOUND).contentType(ContentType.JSON);
+        Assert.assertEquals(jsonPath.getString("message"),"User not found!");
     }
     @Test
     public void TC0103(){
@@ -79,9 +85,11 @@ public class TC01Post {
                 post(endpoint);
         response.prettyPrint();
 
-        Assert.assertTrue(response.asString().contains("User not found!"));
+        jsonPath=response.jsonPath();
+
+        Assert.assertEquals(jsonPath.getString("message"),"User not found!");
         System.out.println(response.getStatusCode());
-        Assert.assertEquals(response.getStatusCode(),"404");
+        Assert.assertEquals(response.getStatusCode(),404);
 
     }
     @Test
@@ -98,6 +106,9 @@ public class TC01Post {
                 post(endpoint);
         response.prettyPrint();
 
+        jsonPath=response.jsonPath();
+
+        Assert.assertEquals(jsonPath.getString("message"),"UserName and Password required.");
         System.out.println(response.getStatusCode());
         System.out.println(response.getContentType());
 
