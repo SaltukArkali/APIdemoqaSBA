@@ -1,17 +1,13 @@
 package tests;
 
 import io.restassured.http.ContentType;
-import io.restassured.mapper.ObjectMapper;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.testng.annotations.Test;
-import pages.Book;
 import utilities.ConfigReader;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.*;

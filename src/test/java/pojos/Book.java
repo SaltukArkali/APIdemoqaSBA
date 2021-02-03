@@ -1,4 +1,4 @@
-package pages;
+package pojos;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonProperty;
 

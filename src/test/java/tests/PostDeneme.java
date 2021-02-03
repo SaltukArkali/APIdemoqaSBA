@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.PojoDeneme;
+import pojos.PojoDeneme;
 import utilities.ReusableMethods;
 
 import java.util.HashMap;

@@ -5,7 +5,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-import pages.PojoDeneme;
+import pojos.PojoDeneme;
 import utilities.ConfigReader;
 
 import java.util.concurrent.ThreadLocalRandom;

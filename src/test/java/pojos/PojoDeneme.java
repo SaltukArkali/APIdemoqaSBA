@@ -1,4 +1,4 @@
-package pages;
+package pojos;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
