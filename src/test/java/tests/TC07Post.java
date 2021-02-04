@@ -8,11 +8,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import pojos.DemoqaPojo1;
 import utilities.ConfigReader;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 
 public class TC07Post {
@@ -22,7 +20,6 @@ public class TC07Post {
     DemoqaPojo1 obj = new DemoqaPojo1();
     Map<String, Object> myPostData = new HashMap<>();
     JsonPath jsonPath;
-
 
     public void postMethod(Object body) {
         response = given().contentType(ContentType.JSON).
@@ -58,7 +55,6 @@ public class TC07Post {
 
     @Test
     public void TC0702() {
-
 //        Kullanici adi  "ahmet" ve sifresi "Zahmet01#02" olan
 //                *   "code": "1200",    "message": "User not authorized!"
 //                * Status kodunun un 401 oldugunu dogrulayiniz.
@@ -84,8 +80,6 @@ public class TC07Post {
 
         Assert.assertTrue(jsonPath.getString("code").equals(String.valueOf(1200)));
         Assert.assertTrue(jsonPath.getString("message").equals("User not authorized!"));
-
-
     }
 
     @Test
@@ -93,7 +87,6 @@ public class TC07Post {
 //        Kullanici adi  "ahmet" ve sifresi "Zahmet01#02" olan  user id = "cf581dae-6ea5-4eea-9b8d-5d8fb200d038"
 //        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFobWV0IiwicGFzc3dvcmQiOiJaYWhtZXQwMSMwMiIsImlhdCI6MTYxMjIxNDYxNn0.a7Py0iME3ptIZHy1UOqgUzYvpQoRzK-DIA_Ru0XgWUo";
 //                * kullanicinin sepetinde 3 adet kitap oldugunu
-
 
         response = given().accept(ContentType.JSON).
                 auth().oauth2(ConfigReader.getProperty("token")).

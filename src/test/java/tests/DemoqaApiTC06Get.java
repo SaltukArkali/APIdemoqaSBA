@@ -63,7 +63,6 @@ public class DemoqaApiTC06Get {
         Assert.assertTrue(mapList.size() == count);
 
 //        assertTrue(response.getBody().asString().contains("isbn"));
-
     }
 
     @Test
